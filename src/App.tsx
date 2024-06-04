@@ -34,6 +34,7 @@ function App() {
     <>
       <Form {...form}>
         <form
+          id="calc-form"
           onSubmit={form.handleSubmit(onSubmit)}
           className="m-2 p-2 space-y-4 max-w-[32rem] border-gray-400 border-2"
         >
@@ -58,7 +59,7 @@ function App() {
       </Form>
 
       <div className="mt-2 ml-2">
-        <Button>Calculate totals!</Button>
+        <Button form="calc-form">Calculate totals!</Button>
       </div>
     </>
   )
