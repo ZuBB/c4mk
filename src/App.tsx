@@ -1,31 +1,30 @@
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form"
+import { Button } from "@/components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormLabel, } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import ProductSubform from './ProductSubform'
-import { FormData } from './interfaces'
+import { FormData, Product } from './interfaces'
 import './App.css'
 
-const getNewProductStub = (index = 0) => {
+const getNewProductStub = (index = 0): Product => {
   return {
     product: "Product " + (index + 1),
-    price: null,
-    split: null,
-    paid: null
+    price: 0,
+    split: "",
+    paid: ""
   }
 }
 
 const defaultValues: FormData = {
-  totalPaidM: 0,
-  totalPaidV: 0,
+  totalPaidMarian: 0,
+  totalPaidVasyl: 0,
   products: [getNewProductStub()]
 };
 
 function App() {
-  const {
-    control,
-    handleSubmit,
-    register,
-  } = useForm<FormData>({ defaultValues })
+  const form = useForm<FormData>({ defaultValues })
 
-  const { fields, append, remove } = useFieldArray({ control, name: "products" })
+  const { fields, append, remove } = useFieldArray({ control: form.control, name: "products" })
 
   const onSubmit: SubmitHandler<FormData> = (values) => {
     console.log(values)
@@ -37,26 +36,51 @@ function App() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ProductSubform fields={fields} remove={remove} />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-4 max-w-[32rem]">
+          <ProductSubform fields={fields} remove={remove} />
 
-        <div>
-          <button type="button" onClick={addProductHandler}>Add new product</button>
-        </div>
+          <div>
+            <Button
+              type="button"
+              onClick={addProductHandler}
+              variant={'secondary'}
+            >
+                Add new product
+            </Button>
+          </div>
 
-        <div>
-          <label htmlFor="total-paid-marian">Paid by Marian</label>
-          <input type="text" {...register("totalPaidM")} id="total-paid-marian" />
-        </div>
-        <div>
-          <label htmlFor="total-paid-vasyl">Paid by Vasyl</label>
-          <input type="text" {...register("totalPaidV")} id="total-paid-vasyl"/>
-        </div>
+          <FormField
+            control={form.control}
+            name="totalPaidMarian"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="total-paid-marian">Total paid by Marian</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} id="total-paid-marian" />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        <div>
-          <button>Calculate totals!</button>
-        </div>
-      </form>
+          <FormField
+            control={form.control}
+            name="totalPaidVasyl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="total-paid-vasyl">Total paid by Vasyl</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} id="total-paid-vasyl" />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <div>
+            <Button>Calculate totals!</Button>
+          </div>
+        </form>
+      </Form>
     </>
   )
 }
