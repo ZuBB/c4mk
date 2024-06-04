@@ -15,14 +15,14 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
   return (
     <>
     {fields.map((product, index) => (
-      <fieldset key={product.id} className="space-y-4 border-gray-200 border-2 p-2">
+      <fieldset key={product.id} className="space-y-3 border-gray-200 border-2 p-2">
         <legend className="text-lg px-1">Product #{index + 1}</legend>
 
         <FormField
           control={control}
           name={`products.${index}.product`}
           render={({ field }) => (
-            <FormItem>
+            <FormItem className='!-mt-1'>
               <FormLabel htmlFor={"product-" + index}>Enter name of the product</FormLabel>
               <FormControl>
                 <Input
@@ -47,6 +47,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   id={"price-" + index}
                   placeholder="Product price"
                   type="number"
+                  required
                 />
               </FormControl>
             </FormItem>
@@ -64,6 +65,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   className="flex gap-3"
+                  required
                 >
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
@@ -130,6 +132,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   className="flex gap-4"
+                  required
                 >
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
