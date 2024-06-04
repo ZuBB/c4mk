@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form"
 import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Form } from "@/components/ui/form"
 import ProductSubform from './ProductSubform'
 import { FormData, Product } from './interfaces'
 import './App.css'
@@ -16,8 +15,6 @@ const getNewProductStub = (index = 0): Product => {
 }
 
 const defaultValues: FormData = {
-  totalPaidMarian: 0,
-  totalPaidVasyl: 0,
   products: [getNewProductStub()]
 };
 
@@ -57,32 +54,6 @@ function App() {
                 Add new product
             </Button>
           </div>
-
-          <FormField
-            control={form.control}
-            name="totalPaidMarian"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="total-paid-marian">Total paid by Marian</FormLabel>
-                <FormControl>
-                  <Input type="number" {...field} id="total-paid-marian" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="totalPaidVasyl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="total-paid-vasyl">Total paid by Vasyl</FormLabel>
-                <FormControl>
-                  <Input type="number" {...field} id="total-paid-vasyl" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
 
           <div>
             <Button>Calculate totals!</Button>

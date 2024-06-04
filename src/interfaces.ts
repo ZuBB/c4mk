@@ -18,7 +18,5 @@ export type Product = {
 }
 
 export type FormData = {
-  totalPaidMarian: number,
-  totalPaidVasyl: number
   products: Product[]
 }
