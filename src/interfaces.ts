@@ -10,7 +10,7 @@ export enum ShareRule {
   VasylOnly = "VasylOnly"
 }
 
-export interface Product {
+export type Product = {
   product: string,
   price: string,
   shareRule: ShareRule | ''
@@ -19,4 +19,13 @@ export interface Product {
 
 export type FormData = {
   products: Product[]
+}
+
+export type Results = {
+  vasylsItemsTotalPrice: number,
+  mariansItemsTotalPrice: number,
+  spentByVasyl: number,
+  spentByMarian: number,
+  vasylsFinalState: number,
+  mariansFinalState: number
 }

@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import ProductSubform from './ProductSubform'
+import Stats from './Stats'
 import { calcSummary } from './calc-summary'
-import { FormData, Product } from './interfaces'
+import { FormData, Results, Product } from './interfaces'
 
 const getNewProductStub = (index = 0): Product => {
   return {
@@ -21,9 +23,10 @@ const defaultValues: FormData = {
 function App() {
   const form = useForm<FormData>({ defaultValues, mode: 'onChange' })
   const { fields, append, remove } = useFieldArray({ control: form.control, name: 'products' })
+  const [results, setResults] = useState<Results | null>(null);
 
   const onSubmit: SubmitHandler<FormData> = (values) => {
-    console.log(calcSummary(values.products))
+    setResults(calcSummary(values.products));
   }
 
   const addProductHandler = () => {
@@ -58,9 +61,11 @@ function App() {
         </form>
       </Form>
 
-      <div className="mt-2 ml-2">
+      <div className="my-2 ml-2">
         <Button form="calc-form">Calculate totals!</Button>
       </div>
+
+      {results && (<Stats results={results} />)}
     </>
   )
 }

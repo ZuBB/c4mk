@@ -1,8 +1,46 @@
-import { Product, PaidBy, ShareRule } from './interfaces'
+import { Product, PaidBy, Results, ShareRule } from './interfaces'
 
 const round2 = (n: number) => Math.round(n * 100) / 100
 
-export const calcSummary = (products: Product[]) => {
+const calcStats = (products: Product[]) => {
+  let spentByFfRule = 0
+  let spentBy1to2Rule = 0
+  let spentByVoRule = 0
+  let spentByMoRule = 0
+  let spentByVasyl = 0
+  let spentByMarian = 0
+
+  products.forEach(product => {
+    const price = parseFloat(product.price)
+
+    if (product.paidBy === PaidBy.Vasyl) {
+      spentByVasyl += price
+    } else {
+      spentByMarian += price
+    }
+
+    if (product.shareRule === ShareRule.Fifty_Fifty) {
+      spentByFfRule += price
+    } else if (product.shareRule === ShareRule.One_to_Two) {
+      spentBy1to2Rule += price
+    } else if (product.shareRule === ShareRule.VasylOnly) {
+      spentByVoRule = price
+    } else {
+      spentByMoRule = price
+    }
+  })
+
+  return {
+    spentByFfRule,
+    spentBy1to2Rule,
+    spentByVoRule,
+    spentByMoRule,
+    spentByMarian,
+    spentByVasyl
+  }
+}
+
+export const calcSummary = (products: Product[]): Results => {
   const results = calcStats(products)
   const {
     spentByFfRule,
@@ -38,34 +76,4 @@ export const calcSummary = (products: Product[]) => {
     vasylsFinalState: round2(spentByVasyl - vasylsItemsTotalPrice),
     mariansFinalState: round2(spentByMarian - mariansItemsTotalPrice)
   }
-}
-
-const calcStats = (products: Product[]) => {
-  let spentByFfRule = 0
-  let spentBy1to2Rule = 0
-  let spentByVoRule = 0
-  let spentByMoRule = 0
-  let spentByVasyl = 0
-  let spentByMarian = 0
-
-  products.forEach(product => {
-    const price = parseFloat(product.price)
-
-    if (product.paidBy === PaidBy.Vasyl) {
-      spentByVasyl += price
-    } else {
-      spentByMarian += price
-    }
-
-    if (product.shareRule === ShareRule.Fifty_Fifty) {
-      spentByFfRule += price
-    } else if (product.shareRule === ShareRule.One_to_Two) {
-      spentBy1to2Rule += price
-    } else if (product.shareRule === ShareRule.VasylOnly) {
-      spentByVoRule = price
-    } else {
-      spentByMoRule = price
-    }
-  })
-  return { spentByFfRule, spentBy1to2Rule, spentByVoRule, spentByMoRule, spentByMarian, spentByVasyl }
 }
