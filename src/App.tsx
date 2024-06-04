@@ -7,7 +7,7 @@ import './App.css'
 
 const getNewProductStub = (index = 0): Product => {
   return {
-    product: "Product " + (index + 1),
+    product: "Product #" + (index + 1),
     price: 0,
     split: "",
     paid: ""
@@ -54,12 +54,12 @@ function App() {
                 Add new product
             </Button>
           </div>
-
-          <div>
-            <Button>Calculate totals!</Button>
-          </div>
         </form>
       </Form>
+
+      <div className="mt-2 ml-2">
+        <Button>Calculate totals!</Button>
+      </div>
     </>
   )
 }
