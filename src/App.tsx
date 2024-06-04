@@ -22,9 +22,8 @@ const defaultValues: FormData = {
 };
 
 function App() {
-  const form = useForm<FormData>({ defaultValues })
-
-  const { fields, append, remove } = useFieldArray({ control: form.control, name: "products" })
+  const form = useForm<FormData>({ defaultValues, mode: 'onChange' })
+  const { fields, append, remove } = useFieldArray({ control: form.control, name: 'products' })
 
   const onSubmit: SubmitHandler<FormData> = (values) => {
     console.log(values)
@@ -38,7 +37,7 @@ function App() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-4 max-w-[32rem]">
-          <ProductSubform fields={fields} remove={remove} />
+          <ProductSubform fields={fields} remove={remove} control={form.control} />
 
           <div>
             <Button

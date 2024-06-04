@@ -1,4 +1,4 @@
-import { FieldArrayWithId, UseFieldArrayRemove, useForm } from 'react-hook-form'
+import { Control, FieldArrayWithId, UseFieldArrayRemove } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -8,11 +8,10 @@ import { FormData, PaidBy, SplitBy } from './interfaces'
 type ProductSubform = {
   fields: FieldArrayWithId<FormData, 'products', 'id'>[],
   remove: UseFieldArrayRemove
+  control: Control<FormData, unknown>
 }
 
-function ProductSubform({fields, remove}: ProductSubform) {
-  const { control } = useForm();
-
+function ProductSubform({control, fields, remove}: ProductSubform) {
   return (
     <>
     {fields.map((product, index) => (
