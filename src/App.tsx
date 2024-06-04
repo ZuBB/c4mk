@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form"
+import now from '~build/time';
+import { sha } from '~build/git';
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import ProductSubform from './ProductSubform'
 import Stats from './Stats'
 import { calcSummary } from './calc-summary'
 import { FormData, Results, Product } from './interfaces'
+
+const attrName = 'data-buildmetadata';
+const attrValue = sha.slice(0, 8) + ':' + now.toISOString();
 
 const getNewProductStub = (index = 0): Product => {
   return {
@@ -32,6 +37,10 @@ function App() {
   const addProductHandler = () => {
     append(getNewProductStub(fields.length))
   }
+
+  useEffect(() => {
+    document.head.setAttribute(attrName, attrValue)
+  }, [])
 
   return (
     <>
