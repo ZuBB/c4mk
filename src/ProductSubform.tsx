@@ -15,8 +15,8 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
   return (
     <>
     {fields.map((product, index) => (
-      <fieldset key={product.id} className="space-y-4">
-        <legend className="text-lg">Product #{index + 1}</legend>
+      <fieldset key={product.id} className="space-y-4 border-gray-200 border-2 p-2">
+        <legend className="text-lg px-1">Product #{index + 1}</legend>
 
         <FormField
           control={control}
@@ -57,13 +57,13 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
           control={control}
           name={`products.${index}.split`}
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className="space-y-3 -mr-2">
               <FormLabel>Shared by</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex gap-4"
+                  className="flex gap-3"
                 >
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
@@ -85,7 +85,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                       />
                     </FormControl>
                     <FormLabel className="font-normal" htmlFor={"split-1vs2-" + index}>
-                      1 part to 2 parts
+                      1p/2p
                     </FormLabel>
                   </FormItem>
 

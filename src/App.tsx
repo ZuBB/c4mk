@@ -36,8 +36,17 @@ function App() {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-4 max-w-[32rem]">
-          <ProductSubform fields={fields} remove={remove} control={form.control} />
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="m-2 p-2 space-y-4 max-w-[32rem] border-gray-400 border-2"
+        >
+          <h1 className="text-2xl">Shopping calculator</h1>
+
+          <ProductSubform
+            fields={fields}
+            remove={remove}
+            control={form.control}
+          />
 
           <div>
             <Button
