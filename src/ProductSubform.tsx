@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { FormData, PaidBy, SplitBy } from './interfaces'
+import { FormData, PaidBy, ShareRule } from './interfaces'
 
 type ProductSubform = {
   fields: FieldArrayWithId<FormData, 'products', 'id'>[],
@@ -56,7 +56,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
 
         <FormField
           control={control}
-          name={`products.${index}.split`}
+          name={`products.${index}.shareRule`}
           render={({ field }) => (
             <FormItem className="space-y-3 -mr-2">
               <FormLabel>Shared by</FormLabel>
@@ -70,7 +70,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
                       <RadioGroupItem
-                        value={SplitBy.Fifty_Fifty}
+                        value={ShareRule.Fifty_Fifty}
                         id={"split-equal-" + index}
                       />
                     </FormControl>
@@ -82,7 +82,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
                       <RadioGroupItem
-                        value={SplitBy.One_to_Two}
+                        value={ShareRule.One_to_Two}
                         id={"split-1vs2-" + index}
                       />
                     </FormControl>
@@ -94,7 +94,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
                       <RadioGroupItem
-                        value={SplitBy.MarianOnly}
+                        value={ShareRule.MarianOnly}
                         id={"split-only-marian-" + index}
                       />
                     </FormControl>
@@ -106,7 +106,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   <FormItem className="flex items-center space-x-1 space-y-0">
                     <FormControl>
                       <RadioGroupItem
-                        value={SplitBy.VasylOnly}
+                        value={ShareRule.VasylOnly}
                         id={"split-only-vasyl-" + index}
                       />
                     </FormControl>
@@ -123,7 +123,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
 
         <FormField
           control={control}
-          name={`products.${index}.paid`}
+          name={`products.${index}.paidBy`}
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel>Paid by:</FormLabel>

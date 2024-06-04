@@ -2,15 +2,16 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import ProductSubform from './ProductSubform'
-import { FormData, Product } from './interfaces'
+import { calcSummary } from './calc-summary'
+import { FormData, FormProduct } from './interfaces'
 import './App.css'
 
-const getNewProductStub = (index = 0): Product => {
+const getNewProductStub = (index = 0): FormProduct => {
   return {
     product: "Product #" + (index + 1),
-    price: 0,
-    split: "",
-    paid: ""
+    price: '',
+    shareRule: '',
+    paidBy: ''
   }
 }
 
@@ -23,7 +24,7 @@ function App() {
   const { fields, append, remove } = useFieldArray({ control: form.control, name: 'products' })
 
   const onSubmit: SubmitHandler<FormData> = (values) => {
-    console.log(values)
+    console.log(calcSummary(values.products))
   }
 
   const addProductHandler = () => {

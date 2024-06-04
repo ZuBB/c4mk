@@ -3,20 +3,34 @@ export enum PaidBy {
   Vasyl = "Vasyl"
 }
 
-export enum SplitBy {
+export enum ShareRule {
   Fifty_Fifty = "Fifty_Fifty",
   One_to_Two = "One_to_Two",
   MarianOnly = "MarianOnly",
   VasylOnly = "VasylOnly"
 }
 
-export type Product = {
+interface BaseProduct {
   product: string,
+  shareRule: ShareRule | ''
+  paidBy: PaidBy | ''
+}
+
+export interface FormProduct extends BaseProduct {
+  price: string,
+}
+
+export interface DataProduct extends BaseProduct {
   price: number,
-  split: SplitBy | ''
-  paid: PaidBy | ''
 }
 
 export type FormData = {
-  products: Product[]
+  products: FormProduct[]
+}
+
+export interface ShareRuleSpendings {
+  spentByFfRule: number;
+  spentBy1to2Rule: number;
+  spentByVoRule: number;
+  spentByMoRule: number;
 }
