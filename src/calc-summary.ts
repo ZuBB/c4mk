@@ -1,90 +1,71 @@
-import { DataProduct, FormProduct, PaidBy, ShareRule, ShareRuleSpendings } from './interfaces'
+import { Product, PaidBy, ShareRule } from './interfaces'
 
 const round2 = (n: number) => Math.round(n * 100) / 100
 
-const getSpendingsByUser = (
-  products: DataProduct[]
-): { spentByVasyl: number; spentByMarian: number } => {
-  return products.reduce((sum, product) => {
-    let { spentByVasyl, spentByMarian } = sum
+export const calcSummary = (products: Product[]) => {
+  const results = calcStats(products)
+  const {
+    spentByFfRule,
+    spentBy1to2Rule,
+    spentByVoRule,
+    spentByMoRule,
+    spentByMarian,
+    spentByVasyl
+  } = results
 
-    if (product.paidBy === PaidBy.Vasyl) {
-      spentByVasyl += product.price
-    } else {
-      spentByMarian += product.price
-    }
-
-    return {
-      spentByVasyl: round2(spentByVasyl),
-      spentByMarian: round2(spentByMarian)
-    }
-  }, { spentByVasyl: 0, spentByMarian: 0 })
-}
-
-const getSpendingsByShareRule = (products: DataProduct[]): ShareRuleSpendings => {
-  return products.reduce(
-    (sum, product) => {
-      let { spentByFfRule, spentBy1to2Rule, spentByVoRule, spentByMoRule } = sum;
-
-      if (product.shareRule === ShareRule.Fifty_Fifty) {
-        spentByFfRule += product.price;
-      } else if (product.shareRule === ShareRule.One_to_Two) {
-        spentBy1to2Rule += product.price;
-      } else if (product.shareRule === ShareRule.VasylOnly) {
-        spentByVoRule = product.price;
-      } else {
-        spentByMoRule = product.price;
-      }
-
-      return {
-        spentByFfRule: round2(spentByFfRule),
-        spentBy1to2Rule: round2(spentBy1to2Rule),
-        spentByVoRule: round2(spentByVoRule),
-        spentByMoRule: round2(spentByMoRule),
-      };
-    },
-    { spentByFfRule: 0, spentBy1to2Rule: 0, spentByVoRule: 0, spentByMoRule: 0 }
-  );
-}
-
-const getVasylsItemsTotalPrice = (spendingsByShareRule: ShareRuleSpendings) => {
-  return round2(
-    spendingsByShareRule.spentByFfRule / 2 +
-    spendingsByShareRule.spentBy1to2Rule / 3 +
-    spendingsByShareRule.spentByVoRule
+  const vasylsItemsTotalPrice = round2(
+    spentByFfRule / 2 +
+    spentBy1to2Rule / 3 +
+    spentByVoRule
   )
-}
 
-const getMariansItemsTotalPrice = (spendingsByShareRule: ShareRuleSpendings) => {
-  return round2(
-    spendingsByShareRule.spentByFfRule / 2 +
-    spendingsByShareRule.spentBy1to2Rule / 3 * 2 +
-    spendingsByShareRule.spentByMoRule
+  const mariansItemsTotalPrice = round2(
+    spentByFfRule / 2 +
+    spentBy1to2Rule / 3 * 2 +
+    spentByMoRule
   )
-}
 
-export const calcSummary = (productsOrig: FormProduct[]) => {
-  const products = productsOrig.map(product => ({...product, price: parseFloat(product.price)}))
-  const spendingsByShareRule = getSpendingsByShareRule(products)
-  const { spentByVasyl, spentByMarian } = getSpendingsByUser(products)
-
-  const vasylsItemsTotalPrice = getVasylsItemsTotalPrice(spendingsByShareRule)
-  const mariansItemsTotalPrice = getMariansItemsTotalPrice(spendingsByShareRule)
-
-  console.log('products', products)
-  console.log('spentByMarian', spentByMarian)
-  console.log('spentByVasyl', spentByVasyl)
-  console.log('mariansItemsTotalPrice', mariansItemsTotalPrice)
-  console.log('vasylsItemsTotalPrice', vasylsItemsTotalPrice)
-
-  if (vasylsItemsTotalPrice + mariansItemsTotalPrice !== spentByVasyl + spentByMarian) {
-    alert('Your math/CS skills sucks!')
-    // throw('Your math/CS skills sucks!');
-    return
-  }
+  console.assert(
+    vasylsItemsTotalPrice + mariansItemsTotalPrice === spentByVasyl + spentByMarian,
+    'Spending do not match! Your CS/Math skills sucks..'
+  )
 
   return {
+    vasylsItemsTotalPrice,
+    mariansItemsTotalPrice,
+    spentByVasyl,
+    spentByMarian,
     vasylsFinalState: round2(spentByVasyl - vasylsItemsTotalPrice),
     mariansFinalState: round2(spentByMarian - mariansItemsTotalPrice)
   }
+}
+
+const calcStats = (products: Product[]) => {
+  let spentByFfRule = 0
+  let spentBy1to2Rule = 0
+  let spentByVoRule = 0
+  let spentByMoRule = 0
+  let spentByVasyl = 0
+  let spentByMarian = 0
+
+  products.forEach(product => {
+    const price = parseFloat(product.price)
+
+    if (product.paidBy === PaidBy.Vasyl) {
+      spentByVasyl += price
+    } else {
+      spentByMarian += price
+    }
+
+    if (product.shareRule === ShareRule.Fifty_Fifty) {
+      spentByFfRule += price
+    } else if (product.shareRule === ShareRule.One_to_Two) {
+      spentBy1to2Rule += price
+    } else if (product.shareRule === ShareRule.VasylOnly) {
+      spentByVoRule = price
+    } else {
+      spentByMoRule = price
+    }
+  })
+  return { spentByFfRule, spentBy1to2Rule, spentByVoRule, spentByMoRule, spentByMarian, spentByVasyl }
 }

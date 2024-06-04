@@ -10,27 +10,13 @@ export enum ShareRule {
   VasylOnly = "VasylOnly"
 }
 
-interface BaseProduct {
+export interface Product {
   product: string,
+  price: string,
   shareRule: ShareRule | ''
   paidBy: PaidBy | ''
 }
 
-export interface FormProduct extends BaseProduct {
-  price: string,
-}
-
-export interface DataProduct extends BaseProduct {
-  price: number,
-}
-
 export type FormData = {
-  products: FormProduct[]
-}
-
-export interface ShareRuleSpendings {
-  spentByFfRule: number;
-  spentBy1to2Rule: number;
-  spentByVoRule: number;
-  spentByMoRule: number;
+  products: Product[]
 }

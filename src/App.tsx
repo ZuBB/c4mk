@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import ProductSubform from './ProductSubform'
 import { calcSummary } from './calc-summary'
-import { FormData, FormProduct } from './interfaces'
+import { FormData, Product } from './interfaces'
 import './App.css'
 
-const getNewProductStub = (index = 0): FormProduct => {
+const getNewProductStub = (index = 0): Product => {
   return {
     product: "Product #" + (index + 1),
     price: '',
