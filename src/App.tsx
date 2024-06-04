@@ -4,7 +4,6 @@ import { Form } from "@/components/ui/form"
 import ProductSubform from './ProductSubform'
 import { calcSummary } from './calc-summary'
 import { FormData, Product } from './interfaces'
-import './App.css'
 
 const getNewProductStub = (index = 0): Product => {
   return {
