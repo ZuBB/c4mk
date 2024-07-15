@@ -14,19 +14,19 @@ const calcStats = (products: Product[]) => {
     const price = parseFloat(product.price)
 
     if (product.paidBy === PaidBy.Vasyl) {
-      spentByVasyl += price
+      spentByVasyl = round2(spentByVasyl + price)
     } else {
-      spentByMarian += price
+      spentByMarian = round2(spentByMarian + price)
     }
 
     if (product.shareRule === ShareRule.Fifty_Fifty) {
-      spentByFfRule += price
+      spentByFfRule = round2(spentByFfRule + price)
     } else if (product.shareRule === ShareRule.One_to_Two) {
-      spentBy1to2Rule += price
+      spentBy1to2Rule = round2(spentBy1to2Rule + price)
     } else if (product.shareRule === ShareRule.VasylOnly) {
-      spentByVoRule = price
+      spentByVoRule = round2(spentByVoRule + price)
     } else {
-      spentByMoRule = price
+      spentByMoRule = round2(spentByMoRule + price)
     }
   })
 
