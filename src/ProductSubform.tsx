@@ -58,7 +58,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
           name={`products.${index}.shareRule`}
           render={({ field }) => (
             <FormItem className="space-y-3 -mr-2">
-              <FormLabel>Shared by</FormLabel>
+              <FormLabel>Розділено ким</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -86,7 +86,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                       />
                     </FormControl>
                     <FormLabel className="font-normal" htmlFor={"split-1vs2-" + index}>
-                      1p/2p
+                      1ч/2ч
                     </FormLabel>
                   </FormItem>
 
@@ -98,7 +98,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                       />
                     </FormControl>
                     <FormLabel className="font-normal" htmlFor={"split-only-marian-" + index}>
-                      Only Marian
+                      Тільки Мар'ян
                     </FormLabel>
                   </FormItem>
 
@@ -110,7 +110,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                       />
                     </FormControl>
                     <FormLabel className="font-normal" htmlFor={"split-only-vasyl-" + index}>
-                      Only Vasyl
+                      Тільки Василь
                     </FormLabel>
                   </FormItem>
                 </RadioGroup>
