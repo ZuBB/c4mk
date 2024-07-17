@@ -23,7 +23,6 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
           name={`products.${index}.product`}
           render={({ field }) => (
             <FormItem className='!-mt-1'>
-              <FormLabel htmlFor={"product-" + index}>Enter name of the product</FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -40,7 +39,6 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
           name={`products.${index}.price`}
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor={"price-" + index}>Enter price of the product</FormLabel>
               <FormControl>
                 <Input
                   {...field}
