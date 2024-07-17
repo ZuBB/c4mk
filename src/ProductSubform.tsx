@@ -160,6 +160,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
           {fields.length > 1 && (
             <Button
               type="button"
+              className='font-bold'
               onClick={() => remove(index)} variant={"destructive"}
             >
               Видалити

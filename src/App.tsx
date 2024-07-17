@@ -71,7 +71,9 @@ function App() {
       </Form>
 
       <div className="my-2 ml-2">
-        <Button form="calc-form">Порахувати!</Button>
+        <Button form="calc-form" className='bg-blue-600 font-bold'>
+          Порахувати
+        </Button>
       </div>
 
       {results && (<Stats results={results} />)}
