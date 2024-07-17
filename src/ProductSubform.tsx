@@ -120,49 +120,52 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
         />
 
 
-        <FormField
-          control={control}
-          name={`products.${index}.paidBy`}
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>Paid by:</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex gap-4"
-                  required
-                >
-                  <FormItem className="flex items-center space-x-1 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value={PaidBy.Marian} id={"paid-by-marian-" + index} />
-                    </FormControl>
-                    <FormLabel className="font-normal" htmlFor={"paid-by-marian-" + index}>
-                      Marian
-                    </FormLabel>
-                  </FormItem>
+        <div className='flex flex-wrap justify-between items-center'>
+          <FormField
+            control={control}
+            name={`products.${index}.paidBy`}
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Оплачено ким:</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex gap-4"
+                    required
+                  >
+                    <FormItem className="flex items-center space-x-1 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={PaidBy.Marian} id={"paid-by-marian-" + index} />
+                      </FormControl>
+                      <FormLabel className="font-normal" htmlFor={"paid-by-marian-" + index}>
+                        Мар'ян
+                      </FormLabel>
+                    </FormItem>
 
-                  <FormItem className="flex items-center space-x-1 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value={PaidBy.Vasyl} id={"paid-by-vasyl-" + index} />
-                    </FormControl>
-                    <FormLabel className="font-normal" htmlFor={"paid-by-vasyl-" + index}>
-                      Vasyl
-                    </FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+                    <FormItem className="flex items-center space-x-1 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={PaidBy.Vasyl} id={"paid-by-vasyl-" + index} />
+                      </FormControl>
+                      <FormLabel className="font-normal" htmlFor={"paid-by-vasyl-" + index}>
+                        Василь
+                      </FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        {fields.length > 1 && (
-          <div>
-            <Button type="button" onClick={() => remove(index)} variant={"destructive"}>
-              Remove this product
+          {fields.length > 1 && (
+            <Button
+              type="button"
+              onClick={() => remove(index)} variant={"destructive"}
+            >
+              Видалити
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </fieldset>
     ))}
     </>
