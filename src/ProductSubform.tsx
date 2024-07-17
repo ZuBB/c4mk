@@ -16,7 +16,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
     <>
     {fields.map((product, index) => (
       <fieldset key={product.id} className="space-y-3 border-gray-200 border-2 p-2">
-        <legend className="text-lg px-1">Product #{index + 1}</legend>
+        <legend className="text-lg px-1">Товар #{index + 1}</legend>
 
         <FormField
           control={control}
