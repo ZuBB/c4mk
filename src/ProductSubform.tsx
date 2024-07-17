@@ -44,7 +44,8 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                   {...field}
                   id={"price-" + index}
                   placeholder="Ціна товару"
-                  type="number"
+                  pattern="[0-9]+(\.[0-9][0-9]?)?"
+                  inputMode="numeric"
                   required
                 />
               </FormControl>
