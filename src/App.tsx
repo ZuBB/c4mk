@@ -12,9 +12,9 @@ import { FormData, Results, Product } from './interfaces'
 const attrName = 'data-buildmetadata';
 const attrValue = sha.slice(0, 8) + ':' + now.toISOString();
 
-const getNewProductStub = (index = 0): Product => {
+const getNewProductStub = (): Product => {
   return {
-    product: "Product #" + (index + 1),
+    product: '',
     price: '',
     shareRule: '',
     paidBy: ''
@@ -35,7 +35,7 @@ function App() {
   }
 
   const addProductHandler = () => {
-    append(getNewProductStub(fields.length))
+    append(getNewProductStub())
   }
 
   useEffect(() => {
