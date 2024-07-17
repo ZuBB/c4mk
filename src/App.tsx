@@ -50,7 +50,7 @@ function App() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="m-2 p-2 space-y-4 max-w-[32rem] border-gray-400 border-2"
         >
-          <h1 className="text-2xl">Shopping calculator</h1>
+          <h1 className="text-2xl">Калькулятор витрат</h1>
 
           <ProductSubform
             fields={fields}
@@ -64,14 +64,14 @@ function App() {
               onClick={addProductHandler}
               variant={'secondary'}
             >
-                Add new product
+                Додати новий товар
             </Button>
           </div>
         </form>
       </Form>
 
       <div className="my-2 ml-2">
-        <Button form="calc-form">Calculate totals!</Button>
+        <Button form="calc-form">Порахувати!</Button>
       </div>
 
       {results && (<Stats results={results} />)}
