@@ -28,7 +28,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                 <Input
                   {...field}
                   id={"product-" + index}
-                  placeholder={"Product " + (index + 1)}
+                  placeholder="Назва товару"
                 />
               </FormControl>
             </FormItem>
@@ -45,7 +45,7 @@ function ProductSubform({control, fields, remove}: ProductSubform) {
                 <Input
                   {...field}
                   id={"price-" + index}
-                  placeholder="Product price"
+                  placeholder="Ціна товару"
                   type="number"
                   required
                 />
